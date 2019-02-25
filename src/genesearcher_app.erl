@@ -15,6 +15,9 @@
 %%====================================================================
 
 start(_StartType, _StartArgs) ->
+    Dispatch = cowboy_router:compile(routes()),
+    {ok, _} = cowboy:start_clear(
+        rest_listener, [{port, 8888}], #{env => #{dispatch => Dispatch}}),
     genesearcher_sup:start_link().
 
 %%--------------------------------------------------------------------
@@ -24,3 +27,9 @@ stop(_State) ->
 %%====================================================================
 %% Internal functions
 %%====================================================================
+
+routes() ->
+    HostMatch = '_',
+    Paths =
+        [{"/gensearcher/v1/gene_suggest", genesearcher_v1_http, [get]}],
+    [{HostMatch, Paths}].

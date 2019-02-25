@@ -1,13 +1,24 @@
+%%-*- mode: erlang -*-
+
 {application, genesearcher,
- [{description, "An OTP application"},
-  {vsn, "0.1.0"},
+ [
+  {description, "REST Application to allow users to search for a gene by name."},
+  {vsn, git},
   {registered, []},
   {mod, { genesearcher_app, []}},
   {applications,
    [kernel,
-    stdlib
+    stdlib,
+
+    %% third party
+    jsonx,
+    mysql_poolboy,
+    cowboy
    ]},
-  {env,[]},
+  {env,
+   [
+    {http_port, 8888}
+   ]},
   {modules, []},
 
   {maintainers, []},
