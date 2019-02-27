@@ -40,6 +40,7 @@ start_link() ->
 %% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([]) ->
     {PoolOptions, MysqlOptions} = mysql_poolboy_options(),
+    io:format("momu ~p~n", [MysqlOptions]),
     MySQLPoolSrv = mysql_poolboy:child_spec(pool1, PoolOptions, MysqlOptions),
     Procs = [MySQLPoolSrv],
     {ok, { {one_for_all, 0, 1}, Procs} }.

@@ -31,5 +31,6 @@ stop(_State) ->
 routes() ->
     HostMatch = '_',
     Paths =
-        [{"/gensearcher/v1/gene_suggest", genesearcher_v1_http, [get]}],
+        [{"/gensearcher/v1/gene_suggest", genesearcher_v1_http, [get]},
+         {"/gensearcher/v1/health", genesearcher_v1_http, [get]}],
     [{HostMatch, Paths}].
