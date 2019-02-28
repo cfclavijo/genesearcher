@@ -25,9 +25,9 @@ Building the Docker Image
 ----
 This process will download a base image (erlang 21), upload the code, build it inside and install the Service. This workflow gives us the advantage of deploying the code through different OS.
 
-A Docker image called **genesearcher** will be created
+First we need to build and generate a release of the code for linux. Then proceed to create a Docker image called **genesearcher**
 
-    $ make docker
+    $ make docker-image
 
 Running Docker Image
 ----
@@ -102,3 +102,12 @@ Given a partial name of a GENE and target species, returns a list of suggested g
     }
 
 ##### 400 Invalid Parameters
+If `query` or `species` parameters are invalid, the service will return a message indicating which parameter is invalid
+    {
+        "error_type": "missing_parameter",
+        "message": [
+          [
+            "species"
+          ]
+        ]
+    }

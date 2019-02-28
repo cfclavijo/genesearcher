@@ -1,4 +1,8 @@
-
+%%% @author Carlos Clavijo
+%%% @copyright (C) 2019, Carlos Clavijo
+%%% @doc
+%%% REST Handler. Control the lifecycle of POST Calls
+%%% @end
 
 -module(genesearcher_v1_http).
 -behavior(cowboy_rest).
@@ -10,7 +14,7 @@
 -export([allowed_methods/2, content_types_provided/2, content_types_accepted/2]).
 
 init(Req0, State) ->
-    io:format("to_init~p~n", [Req]),
+    io:format("to_init~p~n", [Req0]),
     {cowboy_rest, Req0, State}.
 
 

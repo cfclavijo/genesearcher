@@ -1,7 +1,8 @@
-%%%-------------------------------------------------------------------
-%% @doc genesearcher public API
-%% @end
-%%%-------------------------------------------------------------------
+%%% @author Carlos Clavijo
+%%% @copyright (C) 2019, Carlos Clavijo
+%%% @doc
+%%% genesearcher Main Module
+%%% @end
 
 -module(genesearcher_app).
 
@@ -19,7 +20,9 @@ start(_StartType, _StartArgs) ->
     HttpPort = genesearcher:get_env(http_port),
     {ok, _} = cowboy:start_clear(
         rest_listener, [{port, HttpPort}], #{env => #{dispatch => Dispatch}}),
-    genesearcher_sup:start_link().
+    Resp = genesearcher_sup:start_link(),
+    io:format("Genesearcher Service Ready", []),
+    Resp.
 
 %%--------------------------------------------------------------------
 stop(_State) ->

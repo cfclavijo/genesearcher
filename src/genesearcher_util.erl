@@ -1,3 +1,9 @@
+%%% @author Carlos Clavijo
+%%% @copyright (C) 2019, Carlos Clavijo
+%%% @doc
+%%% Utility Module
+%%% @end
+
 -module(genesearcher_util).
 
 -ifdef(TEST).

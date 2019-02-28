@@ -1,3 +1,10 @@
+%%% @author Carlos Clavijo
+%%% @copyright (C) 2019, Carlos Clavijo
+%%% @doc
+%%% ENSEMBL DB Client
+%%% @end
+
+
 -module(genesearcher_ensembldbc).
 
 -ifdef(TEST).
@@ -7,6 +14,10 @@
 -include("genesearcher.hrl").
 
 -export([gene_suggest/3]).
+
+%%====================================================================
+%% API
+%%====================================================================
 
 gene_suggest(Query, Species, Limit) ->
     DisplayLabel = <<Query/binary, "%">>,
@@ -20,6 +31,10 @@ gene_suggest(Query, Species, Limit) ->
         "GROUP BY display_label
          LIMIT ?">>,
     mysql_poolboy:query(?DB_POOL, SqlQuery, [Limit]).
+
+%%====================================================================
+%% Internal functions
+%%====================================================================
 
 prepare_species_param([]) ->
     <<>>;
