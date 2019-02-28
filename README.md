@@ -5,6 +5,7 @@ REST Application to allow users to get *gene name suggestions* for a given *part
 
 Dependencies
 ----
+
 * Rebar3 & Erlang 21
 The Service main language is erlang, you must install this if you want to develop and/or execute the service directly in your machine.
 
@@ -63,6 +64,12 @@ Update `erl.config` according to the required parameters.
         {'ensembldb_password', undefined},
         {'gene_suggest_limit', <<"10">>}
     ]}
+
+Tests
+----
+The test suite will also generate Cobertura coverage XML report for Jenkins.
+
+    $ make test
 
 Usage
 ====

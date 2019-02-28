@@ -1,4 +1,4 @@
-PROJECT			  = geneserver
+PROJECT			  = genesearcher
 REBAR	        = rebar3
 REBAR_PROFILE = default
 
@@ -20,14 +20,16 @@ clean:
 
 fresh:
 	rm -rf _build
+	rm *.xml
 
 run: clean
 	$(REBAR) shell
 
-eunit:
-	export ERL_FLAGS=-config $(PWD)/eunit
+eunit-config:
+	ERL_FLAGS='-config eunit.config' $(REBAR) eunit
 
-test: eunit
+test: eunit-config
+	$(REBAR) cover
 	$(REBAR) covertool generate
 	cp _build/test/covertool/$(PROJECT).covertool.xml $(PROJECT).coverage.xml
 
