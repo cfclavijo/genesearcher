@@ -21,7 +21,6 @@ gene_suggest(Query, Species, Limit) ->
          LIMIT ?">>,
     mysql_poolboy:query(?DB_POOL, SqlQuery, [Limit]).
 
-
 prepare_species_param([]) ->
     <<>>;
 prepare_species_param(Species) ->
