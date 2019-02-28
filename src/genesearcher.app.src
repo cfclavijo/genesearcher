@@ -11,14 +11,12 @@
     stdlib,
 
     %% third party
+    kvc,
     jsonx,
     mysql_poolboy,
     cowboy
    ]},
-  {env,
-   [
-    {http_port, 8888}
-   ]},
+  {env, []},
   {modules, []},
 
   {maintainers, []},
