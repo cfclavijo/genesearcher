@@ -1,18 +1,52 @@
 genesearcher
 ====
 
-REST Application to allow users to search for a gene by name.
+REST Application to allow users to get *gene name suggestions* for a given *partial gene name*.
+
+Dependencies
+----
+* Rebar3 & Erlang 21
+The Service main language is erlang, you must install this if you want to develop and/or execute the service directly in your machine.
+
+* **Docker**
+This Service has been designed to be Dockerized. You can compile and execute it automatically inside a Docker container. *see Running Docker Image*
+
+Getting the code
+===
+Just clone it or download it directly from github
+
+    $ git clone
+
+Docker-ish
+====
+Building the Docker Image
+----
+This process will download a base image (erlang 21), upload the code, build it inside and install the Service. This gives us the advantage of deploying the code through different OS.
+
+A Docker image called **genesearcher** will be created
+
+    $ make docker
+
+Running Docker Image
+----
+With the service Dockerized it becomes easy to launch it in a proper environment (server or locally) by simply running
+
+    $ make docker-run
+
+
+Development
+====
 
 Build
 ----
 
-    $ rebar3 compile
+    $ make
     
 Execute
 ----
 The service will start under port 8080.
 
-    $ rebar3 shell
+    $ make run
     
 Configuration
 ----
@@ -31,7 +65,7 @@ Update `erl.config` according to the required parameters.
     ]}
 
 Usage
-----
+====
 -The service does not require authentication.-
 
 #### gene_suggest
@@ -58,4 +92,5 @@ Given a partial name of a GENE and target species, returns a list of suggested g
             "BRCC3P1"
         ]
     }
-    
+
+##### 400 Invalid Parameters
