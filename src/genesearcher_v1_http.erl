@@ -1,3 +1,5 @@
+
+
 -module(genesearcher_v1_http).
 -behavior(cowboy_rest).
 
@@ -5,10 +7,10 @@
 -export([init/2, handle_request_json/2]).
 
 %% REST API
--export([allowed_methods/2, content_types_provided/2]).
+-export([allowed_methods/2, content_types_provided/2, content_types_accepted/2]).
 
 init(Req0, State) ->
-    io:format("to_init~n", []),
+    io:format("to_init~p~n", [Req]),
     {cowboy_rest, Req0, State}.
 
 
@@ -17,8 +19,8 @@ init(Req0, State) ->
 %%%===================================================================
 
 allowed_methods(Req, State) ->
-    io:format("to_allowed_methods ~p~n", [Req]),
-    {[<<"GET">>], Req, State}.
+    io:format("to_allowed_methods~n", []),
+    {[<<"POST">>], Req, State}.
 
 content_types_provided(Req, State) ->
     io:format("to_provided~n", []),
@@ -26,12 +28,20 @@ content_types_provided(Req, State) ->
       {<<"application/json">>, handle_request_json}
      ], Req, State}.
 
+content_types_accepted(Req, State) ->
+    io:format("to_accepted~n", []),
+    {[
+      {<<"*/*">>, handle_request_json},
+      {<<"application/json">>, handle_request_json}
+     ], Req, State}.
+
 handle_request_json(Req, _State) ->
+    io:format("to_handle~n", []),
     case require_json_body(Req) of
         {Data, NewReq} ->
             case genesearcher_api:gene_suggest(Data) of
                 {ok, Suggestions} ->
-                    Response = jsonx:encode(Suggestions),
+                    Response = jsonx:encode([{<<"suggestions">>, Suggestions}]),
                     json_response(ok, Response, NewReq);
                 {error, {missing_parameter = Reason, Res}} ->
                     Response = jsonx:encode([{error_type, Reason},{message, Res}]),

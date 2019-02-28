@@ -7,7 +7,7 @@ Dependencies
 ----
 
 * Rebar3 & Erlang 21
-The Service main language is erlang, you must install this if you want to develop and/or execute the service directly in your machine.
+The Service main language is erlang, you must install this if you want to develop and/or execute the service directly in your machine. See (http://www.erlang.org/downloads, http://www.rebar3.org/)
 
 * **Docker**
 This Service has been designed to be Dockerized. You can compile and execute it automatically inside a Docker container. *see Running Docker Image*
@@ -16,13 +16,14 @@ Getting the code
 ===
 Just clone it or download it directly from github
 
-    $ git clone
+    $ git clone https://github.com/cfclavijo/genesearcher.git
+
 
 Docker-ish
 ====
 Building the Docker Image
 ----
-This process will download a base image (erlang 21), upload the code, build it inside and install the Service. This gives us the advantage of deploying the code through different OS.
+This process will download a base image (erlang 21), upload the code, build it inside and install the Service. This workflow gives us the advantage of deploying the code through different OS.
 
 A Docker image called **genesearcher** will be created
 
@@ -79,9 +80,9 @@ Usage
 Given a partial name of a GENE and target species, returns a list of suggested gene names.
 
 ##### Example Usage
-    $ curl http://localhost:8080/gensearcher/v1/gene_suggest/ -d '{"query":"brc", "species": ["homo_sapiens"], "limit": "13"}'
+    $ curl -H 'content-type:application/json' http://localhost:8080/gensearcher/v1/gene_suggest/ -d '{"query":"brc", "species": ["homo_sapiens"], "limit": "13"}'
     
-##### JSON Request Body Parameters
+##### JSON Request Body Properties
 
 * `query`:String. The Partial query typed by the user.
 * `species`:List(String). The name of the target species.
