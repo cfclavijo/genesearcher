@@ -103,6 +103,7 @@ Given a partial name of a GENE and target species, returns a list of suggested g
 
 ##### 400 Invalid Parameters
 If `query` or `species` parameters are invalid, the service will return a message indicating which parameter is invalid
+
     {
         "error_type": "missing_parameter",
         "message": [
